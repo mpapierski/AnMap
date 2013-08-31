@@ -1,6 +1,13 @@
 cmake_minimum_required (VERSION 2.8.7)
 project (AnMap)
 
+find_package (wxWidgets REQUIRED COMPONENTS
+	core
+	base)
+include (${wxWidgets_USE_FILE})
+set (AnMap_LIBRARIES
+	${wxWidgets_LIBRARIES})
+
 if (WIN32)
 	list (APPEND AnMap_LIBRARIES
 		winmm)
@@ -53,13 +60,19 @@ source_group ("Header Files"
 	FILES ${AnMap_HEADERS})
 
 include_directories (
-	.)
-add_definitions (-D_AFXDLL)
+	.
+	${wxWidgets_INCLUDE_DIRS})
+add_definitions (
+	-D_AFXDLL
+	-D__AFXWIN_H__)
+
 add_executable (AnMap
 	${AnMap_SOURCES}
 	${AnMap_HEADERS})
+
 target_link_libraries (AnMap
 	${AnMap_LIBRARIES})
+
 IF (WIN32)
 	IF (MSVC)
 		set_target_properties(AnMap PROPERTIES LINK_FLAGS_DEBUG "/SUBSYSTEM:windows")

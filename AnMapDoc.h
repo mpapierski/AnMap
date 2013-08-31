@@ -10,12 +10,11 @@
 #endif // _MSC_VER > 1000
 
 #include "TileSpr.h"
-#include "BrushView.h"
+#include "brushview.h"
 #include "AnMapView.h"
 #include "MiniView.h"
 #include "Sprite.h"
 #include "Undo.h"
-#include <Mmsystem.h>
 
 class CAnMapDoc : public CDocument
 {

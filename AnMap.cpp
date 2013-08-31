@@ -6,7 +6,7 @@
 
 #include "MainFrm.h"
 #include "AnMapDoc.h"
-#include "BrushView.h"
+#include "brushview.h"
 #include "AnMapView.h"
 
 #ifdef _DEBUG
