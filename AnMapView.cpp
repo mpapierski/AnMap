@@ -1,7 +1,7 @@
 // AnMapView.cpp : implementation of the CAnMapView class
 //
 
-#include "stdafx.h"
+#include "StdAfx.h"
 #include "AnMap.h"
 #include "AnMapDoc.h"
 #include "AnMapView.h"

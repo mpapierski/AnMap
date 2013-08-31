@@ -1,7 +1,7 @@
 // AnMapDoc.cpp : implementation of the CAnMapDoc class
 //
 
-#include "stdafx.h"
+#include "StdAfx.h"
 #include "AnMap.h"
 #include "AnMapDoc.h"
 #include "NewMap.h"

@@ -1,7 +1,7 @@
 // BrushView.cpp : implementation of the CBrushView class
 //
 
-#include "stdafx.h"
+#include "StdAfx.h"
 #include "AnMap.h"
 
 #include "AnMapDoc.h"

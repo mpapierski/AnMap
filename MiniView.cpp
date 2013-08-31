@@ -1,7 +1,7 @@
 // MiniView.cpp : implementation file
 //
 
-#include "stdafx.h"
+#include "StdAfx.h"
 #include "AnMap.h"
 
 #include "AnMapDoc.h"
