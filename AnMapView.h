@@ -9,11 +9,13 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
-class CAnMapView : public CScrollView
+#include <wx/wx.h>
+
+class CAnMapView : public wxScrolledWindow
 {
 protected: // create from serialization only
 	CAnMapView();
-	DECLARE_DYNCREATE(CAnMapView)
+	DECLARE_DYNAMIC_CLASS(CAnMapView)
 
 // Attributes
 public:
@@ -26,26 +28,30 @@ public:
 	// ClassWizard generated virtual function overrides
 	//{{AFX_VIRTUAL(CAnMapView)
 	public:
-	virtual void OnDraw(CDC* pDC);  // overridden to draw this view
+	void OnDraw(wxDC& pDC);  // overridden to draw this view
+#if 0
 	virtual BOOL OnScroll(UINT nScrollCode, UINT nPos, BOOL bDoScroll = TRUE);
+#endif
 	protected:
+#if 0
 	virtual void OnInitialUpdate(); // called first time after construct
 	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
 	virtual void OnActivateView(BOOL bActivate, CView* pActivateView, CView* pDeactiveView);
+#endif
 	//}}AFX_VIRTUAL
 
 // Implementation
 public:
-	CAnMapDoc* GetDocument() { return (CAnMapDoc*)m_pDocument; }
+	CAnMapDoc* GetDocument() { return (CAnMapDoc*)m_pDoc; }
 	CAnMapDoc* m_pDoc;
-	CDC BufferDC;
-	RECT m_rtClient;
-	POINT m_ptClipping;
-	POINT m_ptScroll;
-	UINT m_nAutoSaveTimer;
-	UINT m_nCursorTimer;
-	BOOL m_bCursor;
-	void SetStatusText( int iPane, CString str);
+	wxDC * BufferDC;
+	wxRect m_rtClient;
+	wxPoint m_ptClipping;
+	wxPoint m_ptScroll;
+	unsigned int m_nAutoSaveTimer;
+	unsigned int m_nCursorTimer;
+	bool m_bCursor;
+	void SetStatusText( int iPane, wxString str);
 	void DrawLimitLine();
 	void RenderBrush();
 	void RenderTile();
@@ -59,20 +65,22 @@ public:
 // Generated message map functions
 protected:
 	//{{AFX_MSG(CAnMapView)
-	afx_msg void OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
-	afx_msg void OnSize(UINT nType, int cx, int cy);
-	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
-	afx_msg void OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags);
-	afx_msg BOOL OnMouseWheel(UINT nFlags, short zDelta, CPoint pt);
-	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
-	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
-	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
-	afx_msg void OnRButtonDown(UINT nFlags, CPoint point);
-	afx_msg void OnRButtonUp(UINT nFlags, CPoint point);
-	afx_msg void OnTimer(UINT nIDEvent);
-	afx_msg void OnDestroy();
+#if 0
+	void OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
+	void OnSize(UINT nType, int cx, int cy);
+	void OnMouseMove(UINT nFlags, CPoint point);
+	void OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags);
+	BOOL OnMouseWheel(UINT nFlags, short zDelta, CPoint pt);
+	void OnLButtonDown(UINT nFlags, CPoint point);
+	BOOL OnEraseBkgnd(CDC* pDC);
+	void OnLButtonUp(UINT nFlags, CPoint point);
+	void OnRButtonDown(UINT nFlags, CPoint point);
+	void OnRButtonUp(UINT nFlags, CPoint point);
+	void OnTimer(UINT nIDEvent);
+	void OnDestroy();
+#endif
 	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+	DECLARE_EVENT_TABLE()
 };
 
 /////////////////////////////////////////////////////////////////////////////

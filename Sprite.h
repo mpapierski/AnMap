@@ -9,30 +9,33 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
+#include <fstream>
+#include <wx/colour.h>
+
 class CSprite  
 {
 public:
-	CSprite(HANDLE hFileRead, short sSprID, short NthFile, char* FileName);
+	CSprite(std::ifstream & hFileRead, short sSprID, short NthFile, char* FileName);
 	virtual ~CSprite();
-	BOOL MakeMemDC(CDC *pDC);
-	void DrawRealSprite(CDC *pDC, short dx, short dy, short sSprFrame);
-	void DrawRealObject(CDC *pDC, short dx, short dy, short sSprFrame);
-	void DrawMiniSprite(CDC *pDC, short dx, short dy, short sSprFrame, short sSize);
-	void DrawMiniObject(CDC *pDC, short dx, short dy, short sSprFrame, short sSize);
-	void DrawBrush(CDC *pDC);
-	BOOL InsertBrush(short x1, short y1, short x2, short y2, short pvx, short pvy);
+	bool MakeMemDC(wxDC * pDC);
+	void DrawRealSprite(wxDC *pDC, short dx, short dy, short sSprFrame);
+	void DrawRealObject(wxDC *pDC, short dx, short dy, short sSprFrame);
+	void DrawMiniSprite(wxDC *pDC, short dx, short dy, short sSprFrame, short sSize);
+	void DrawMiniObject(wxDC *pDC, short dx, short dy, short sSprFrame, short sSize);
+	void DrawBrush(wxDC *pDC);
+	bool InsertBrush(short x1, short y1, short x2, short y2, short pvx, short pvy);
 	void DeleteBrush(int index);
-	BOOL IsBlankTile(short sSprFrame);
-	DWORD m_dwBmpStartPos;
-	CDC   BufferDC;
+	bool IsBlankTile(short sSprFrame);
+	unsigned int m_dwBmpStartPos;
+	wxDC * BufferDC;
 	char  m_cFileName[16];
 	int   m_iScreenX;
 	int   m_iScreenY;
 	int   m_iTotalFrame;
-	BOOL  m_bIsDCEmpty;
+	bool  m_bIsDCEmpty;
 	short m_sHowManyBrushes;
 	short m_sSprID;
-	COLORREF m_color;
+	wxColour m_color;
 	struct {
 		char x;
 		char y;

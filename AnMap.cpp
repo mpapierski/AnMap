@@ -18,14 +18,14 @@ static char THIS_FILE[] = __FILE__;
 /////////////////////////////////////////////////////////////////////////////
 // CAnMapApp
 
-BEGIN_MESSAGE_MAP(CAnMapApp, CWinApp)
+BEGIN_EVENT_TABLE(CAnMapApp, wxApp)
 	//{{AFX_MSG_MAP(CAnMapApp)
-	ON_COMMAND(ID_APP_ABOUT, OnAppAbout)
+	EVT_MENU(ID_APP_ABOUT, CAnMapApp::OnAppAbout)
 	//}}AFX_MSG_MAP
 	// Standard file based document commands
-	ON_COMMAND(ID_FILE_NEW, CWinApp::OnFileNew)
-	ON_COMMAND(ID_FILE_OPEN, CWinApp::OnFileOpen)
-END_MESSAGE_MAP()
+	//ON_COMMAND(ID_FILE_NEW, CWinApp::OnFileNew)
+	//ON_COMMAND(ID_FILE_OPEN, CWinApp::OnFileOpen)
+END_EVENT_TABLE()
 
 /////////////////////////////////////////////////////////////////////////////
 // CAnMapApp construction
@@ -42,7 +42,7 @@ CAnMapApp theApp;
 /////////////////////////////////////////////////////////////////////////////
 // CAnMapApp initialization
 
-BOOL CAnMapApp::InitInstance()
+bool CAnMapApp::OnInit()
 {
 	// Standard initialization
 	// Change the registry key under which our settings are stored.
@@ -149,11 +149,11 @@ void CAboutDlg::DoDataExchange(CDataExchange* pDX)
 	//}}AFX_DATA_MAP
 }
 
-BEGIN_MESSAGE_MAP(CAboutDlg, CDialog)
+BEGIN_EVENT_TABLE(CAboutDlg, CDialog)
 	//{{AFX_MSG_MAP(CAboutDlg)
 		// No message handlers
 	//}}AFX_MSG_MAP
-END_MESSAGE_MAP()
+END_EVENT_TABLE()
 
 // App command to run the dialog
 void CAnMapApp::OnAppAbout()

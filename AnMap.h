@@ -20,29 +20,29 @@
 // See AnMap.cpp for the implementation of this class
 //
 
-class CAnMapApp : public CWinApp
+class CAnMapApp : public wxApp
 {
 public:
 	CAnMapApp();
 	char    m_strWorkingFolder[256];
-	CString m_strLastFile;
-	BOOL	m_bAutoSave;
-	DWORD	m_dwAutoSaveDelay;
-	DWORD	m_dwCursorDelay;
-	DWORD	m_dwScrollDelay;
+	wxString m_strLastFile;
+	bool	m_bAutoSave;
+	unsigned int	m_dwAutoSaveDelay;
+	unsigned int	m_dwCursorDelay;
+	unsigned int	m_dwScrollDelay;
 
 // Overrides
 	// ClassWizard generated virtual function overrides
 	//{{AFX_VIRTUAL(CAnMapApp)
 	public:
-	virtual BOOL InitInstance();
+	bool OnInit();
 	//}}AFX_VIRTUAL
 
 // Implementation
 	//{{AFX_MSG(CAnMapApp)
-	afx_msg void OnAppAbout();
+	void OnAppAbout(wxCommandEvent&);
 	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+	DECLARE_EVENT_TABLE()
 };
 
 

@@ -7,24 +7,26 @@
 // MiniView.h : header file
 //
 
+#include <wx/docview.h>
+
 /////////////////////////////////////////////////////////////////////////////
 // CMiniView view
 
-class CMiniView : public CView
+class CMiniView : public wxView
 {
 protected:
 	CMiniView();           // protected constructor used by dynamic creation
-	DECLARE_DYNCREATE(CMiniView)
+	DECLARE_DYNAMIC_CLASS(CMiniView)
 
 // Attributes
 public:
-	CAnMapDoc* GetDocument() { return (CAnMapDoc*)m_pDocument; }
+	CAnMapDoc* GetDocument() { return (CAnMapDoc*)m_pDoc; }
 	CAnMapDoc* m_pDoc;
-	CDC BufferDC;
-	CDC OffDC;
-	CDC BackDC;
+	wxDC * BufferDC;
+	wxDC * OffDC;
+	wxDC * BackDC;
 	short m_sTmp;
-	RECT m_rtClient;
+	wxRect m_rtClient;
 
 // Operations
 public:
@@ -35,7 +37,7 @@ public:
 	public:
 	virtual void OnInitialUpdate();
 	protected:
-	virtual void OnDraw(CDC* pDC);      // overridden to draw this view
+	void OnDraw(wxDC & pDC);      // overridden to draw this view
 	//}}AFX_VIRTUAL
 
 // Implementation
@@ -52,14 +54,16 @@ public:
 	// Generated message map functions
 protected:
 	//{{AFX_MSG(CMiniView)
-	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
-	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
-	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
-	afx_msg void OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
-	afx_msg void OnSize(UINT nType, int cx, int cy);
-	afx_msg void OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags);
+#if 0
+	void OnLButtonDown(UINT nFlags, CPoint point);
+	void OnLButtonUp(UINT nFlags, CPoint point);
+	void OnMouseMove(UINT nFlags, CPoint point);
+	void OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
+	void OnSize(UINT nType, int cx, int cy);
+	void OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags);
+#endif
 	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+	DECLARE_EVENT_TABLE()
 };
 
 /////////////////////////////////////////////////////////////////////////////

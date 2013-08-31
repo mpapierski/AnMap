@@ -9,17 +9,19 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
+#include <wx/treectrl.h>
+
 class CAnMapDoc;
 
-class CBrushView : public CTreeView
+class CBrushView : public wxTreeCtrl
 {
 protected: // create from serialization only
 	CBrushView();
-	DECLARE_DYNCREATE(CBrushView)
+	DECLARE_DYNAMIC_CLASS(CBrushView)
 
 // Attributes
 public:
-	CAnMapDoc* GetDocument() { return (CAnMapDoc*)m_pDocument; }
+	CAnMapDoc* GetDocument() { return (CAnMapDoc*)m_pDoc; }
 	CAnMapDoc* m_pDoc;
 
 // Operations
@@ -30,8 +32,10 @@ public:
 	// ClassWizard generated virtual function overrides
 	//{{AFX_VIRTUAL(CBrushView)
 	public:
-	virtual void OnDraw(CDC* pDC);  // overridden to draw this view
+	virtual void OnDraw(wxDC& pDC);  // overridden to draw this view
+#if 0
 	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
+#endif
 	protected:
 	virtual void OnInitialUpdate(); // called first time after construct
 	//}}AFX_VIRTUAL
@@ -47,11 +51,13 @@ public:
 // Generated message map functions
 protected:
 	//{{AFX_MSG(CBrushView)
+#if 0
 	afx_msg void OnSelchanged(NMHDR* pNMHDR, LRESULT* pResult);
 	afx_msg void OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
 	afx_msg void OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags);
+#endif
 	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+	DECLARE_EVENT_TABLE()
 };
 
 /////////////////////////////////////////////////////////////////////////////

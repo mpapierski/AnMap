@@ -10,11 +10,11 @@
 /////////////////////////////////////////////////////////////////////////////
 // CSplash dialog
 
-class CSplash : public CDialog
+class CSplash : public wxDialog
 {
 // Construction
 public:
-	CSplash(CWnd* pParent = NULL);   // standard constructor
+	CSplash(wxWindow* pParent = NULL);   // standard constructor
 
 // Dialog Data
 	//{{AFX_DATA(CSplash)
@@ -27,7 +27,9 @@ public:
 	// ClassWizard generated virtual function overrides
 	//{{AFX_VIRTUAL(CSplash)
 	protected:
+#if 0
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+#endif
 	//}}AFX_VIRTUAL
 
 // Implementation
@@ -37,7 +39,7 @@ protected:
 	//{{AFX_MSG(CSplash)
 		// NOTE: the ClassWizard will add member functions here
 	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+	DECLARE_EVENT_TABLE()
 };
 
 //{{AFX_INSERT_LOCATION}}

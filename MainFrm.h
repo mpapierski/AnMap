@@ -9,21 +9,23 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
+#include <wx/splitter.h>
+
 class CAnMapView;
 class CMiniView;
 
-class CMainFrame : public CFrameWnd
+class CMainFrame : public wxFrame
 {
 	
 protected: // create from serialization only
 	CMainFrame();
-	DECLARE_DYNCREATE(CMainFrame)
+	DECLARE_DYNAMIC_CLASS(CMainFrame)
 
 // Attributes
 public:
-	CStatusBar  m_wndStatusBar;
-	CSplitterWnd m_wndSplitter;
-	CSplitterWnd m_wndSplitter2;
+	wxStatusBar  m_wndStatusBar;
+	wxSplitterWindow m_wndSplitter;
+	wxSplitterWindow m_wndSplitter2;
 
 // Operations
 public:
@@ -32,8 +34,10 @@ public:
 	// ClassWizard generated virtual function overrides
 	//{{AFX_VIRTUAL(CMainFrame)
 	public:
-	virtual BOOL OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext* pContext);
-	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
+#if 0
+	virtual bool OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext* pContext);
+	virtual bool PreCreateWindow(CREATESTRUCT& cs);
+#endif
 	//}}AFX_VIRTUAL
 
 // Implementation
@@ -47,15 +51,17 @@ public:
 #endif
 
 //protected:  // control bar embedded members
-	CToolBar    m_wndToolBar;
+	wxToolBar    m_wndToolBar;
 
 // Generated message map functions
 protected:
 	//{{AFX_MSG(CMainFrame)
+#if 0
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	afx_msg void OnClose();
+#endif
 	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+	DECLARE_EVENT_TABLE()
 };
 
 /////////////////////////////////////////////////////////////////////////////

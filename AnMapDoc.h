@@ -16,16 +16,16 @@
 #include "Sprite.h"
 #include "Undo.h"
 
-class CAnMapDoc : public CDocument
+class CAnMapDoc : public wxDocument
 {
 protected: // create from serialization only
 	CAnMapDoc();
-	DECLARE_DYNCREATE(CAnMapDoc)
+	DECLARE_DYNAMIC_CLASS(CAnMapDoc)
 
 // Attributes
 public:
 	CAnMapApp	*m_pApp;
-	BOOL		m_bWorkMode;//TRUE이면 타일찍기 모드, FALSE이면 브러쉬 선택 모드
+	bool		m_bWorkMode;//TRUE이면 타일찍기 모드, FALSE이면 브러쉬 선택 모드
 	char		m_cWorkMode;//0:일반타일 1:Moveable 2:Teleport 3:Farming
 	short		m_sMapDataSizeX, m_sMapDataSizeY;
 	short		m_sBrsX1, m_sBrsY1;
@@ -40,24 +40,26 @@ public:
 	int			m_iSelObject;
 	int			m_iBrushMode;
 	int			m_iTempX, m_iTempY;
-	BOOL		m_bModified;
-	BOOL		m_bGrid;
-	BOOL		m_bTree;
-	BOOL		m_bActivated;
-	BOOL		m_bReadyMiniView;
-	BOOL		m_bReadyAnMapView;
-	BOOL		m_bAutoSave;
-	DWORD		m_dwAutoSaveDelay;
-	DWORD		m_dwCursorDelay;
-	DWORD		m_dwScrollTime;
-	DWORD		m_dwScrollDelay;
+	bool		m_bModified;
+	bool		m_bGrid;
+	bool		m_bTree;
+	bool		m_bActivated;
+	bool		m_bReadyMiniView;
+	bool		m_bReadyAnMapView;
+	bool		m_bAutoSave;
+	unsigned int		m_dwAutoSaveDelay;
+	unsigned int		m_dwCursorDelay;
+	unsigned int		m_dwScrollTime;
+	unsigned int		m_dwScrollDelay;
 	CUndo		*m_pUndo[DEF_MAX_UNDO];
+#if 0
 	HANDLE		m_hMutex;
-	POINTS		m_ScrollPt;
-	POINTS		m_mousept;
-	POINTS		m_edit1, m_edit2, m_memsize;
-	CString		m_filename;
-	CString		m_pathname;
+#endif
+	wxPoint		m_ScrollPt;
+	wxPoint		m_mousept;
+	wxPoint		m_edit1, m_edit2, m_memsize;
+	wxString	m_filename;
+	wxString	m_pathname;
 	CSprite		*m_pSprite[DEF_MAXSPRITES];
 	CTileSpr	m_tile[752][752];
 	CTileSpr	m_mTile[752][752];
@@ -69,24 +71,24 @@ public:
 public:
 	CUndo* MakeUndo();
 	void CopyTile( CTileSpr* pDstTile, CTileSpr* pSrcTile );
-	BOOL IsBrushMatched( int i, short mx, short my );
+	bool IsBrushMatched( int i, short mx, short my );
 	void ChangeBrush(int iDir);
 	void SelectBrush(int iDir);
-	BOOL _bDecodeMapInfo( char * pHeader );
-	BOOL bOpenMapDataFile( CString cFn );
-	void OnKeyDown( UINT nChar);
-	void OnKeyUp(UINT nChar);
-	void OnLButtonDown(UINT nFlags);
-	void OnLButtonUp(UINT nFlags);
-	void OnRButtonDown(UINT nFlags);
-	void OnRButtonUp(UINT nFlags);
-	void OnMouseMove(UINT nFlags);
+	bool _bDecodeMapInfo( char * pHeader );
+	bool bOpenMapDataFile( wxString cFn );
+	void OnKeyDown( wxKeyEvent & nChar);
+	void OnKeyUp(wxKeyEvent & nChar);
+	void OnLButtonDown(wxEvent & nFlags);
+	void OnLButtonUp(wxEvent & nFlags);
+	void OnRButtonDown(wxEvent & nFlags);
+	void OnRButtonUp(wxEvent & nFlags);
+	void OnMouseMove(wxEvent & nFlags);
 	void SaveFileAs();
-	void SaveMapData( CString cFn );
+	void SaveMapData( wxString cFn );
 	void OnBrushMode( int iBrushIndex );
-	void PutTile( BOOL bMakeUndo );
-	void PutTree( BOOL bMakeUndo );
-	void PutObject( BOOL bMakeUndo );
+	void PutTile( bool bMakeUndo );
+	void PutTree( bool bMakeUndo );
+	void PutObject( bool bMakeUndo );
 	void SetRightView( CAnMapView* pView );
 	void SetMiniView( CMiniView* pView );
 	void SetBrushView( CBrushView* pView);
@@ -112,32 +114,32 @@ public:
 // Generated message map functions
 protected:
 	//{{AFX_MSG(CAnMapDoc)
-	afx_msg void OnFileSaveAs();
-	afx_msg void OnUpdateFileSaveAs(CCmdUI* pCmdUI);
-	afx_msg void OnFileOpen();
-	afx_msg void OnFileSave();
-	afx_msg void OnMoveLeft();
-	afx_msg void OnMoveRight();
-	afx_msg void OnMoveUp();
-	afx_msg void OnMoveDown();
-	afx_msg void OnFileNew();
-	afx_msg void OnViewGrid();
-	afx_msg void OnViewTree();
-	afx_msg void OnUpdateViewGrid(CCmdUI* pCmdUI);
-	afx_msg void OnUpdateViewTree(CCmdUI* pCmdUI);
-	afx_msg void OnEditUndo();
-	afx_msg void OnEditRedo();
-	afx_msg void OnCheckBlank();
-	afx_msg void OnViewRender();
-	afx_msg void OnEditCopy();
-	afx_msg void OnEditPaste();
-	afx_msg void OnUpdateEditUndo(CCmdUI* pCmdUI);
-	afx_msg void OnUpdateEditRedo(CCmdUI* pCmdUI);
-	afx_msg void OnUpdateEditPaste(CCmdUI* pCmdUI);
-	afx_msg void OnUpdateEditCopy(CCmdUI* pCmdUI);
-	afx_msg void OnToolOption();
+	void OnFileSaveAs();
+	void OnUpdateFileSaveAs(wxUpdateUIEvent & event);
+	void OnFileOpen();
+	void OnFileSave();
+	void OnMoveLeft();
+	void OnMoveRight();
+	void OnMoveUp();
+	void OnMoveDown();
+	void OnFileNew();
+	void OnViewGrid();
+	void OnViewTree();
+	void OnUpdateViewGrid(wxUpdateUIEvent & event);
+	void OnUpdateViewTree(wxUpdateUIEvent & event);
+	void OnEditUndo();
+	void OnEditRedo();
+	void OnCheckBlank();
+	void OnViewRender();
+	void OnEditCopy();
+	void OnEditPaste();
+	void OnUpdateEditUndo(wxUpdateUIEvent & event);
+	void OnUpdateEditRedo(wxUpdateUIEvent & event);
+	void OnUpdateEditPaste(wxUpdateUIEvent & event);
+	void OnUpdateEditCopy(wxUpdateUIEvent & event);
+	void OnToolOption();
 	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+	DECLARE_EVENT_TABLE()
 };
 
 /////////////////////////////////////////////////////////////////////////////
